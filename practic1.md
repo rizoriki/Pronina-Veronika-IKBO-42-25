@@ -7,51 +7,51 @@
 ## Задача 1
 
 Вывести отсортированный в алфавитном порядке список имен пользователей в файле passwd (вам понадобится grep).
-Ответ:
+*Ответ:*
 ```
-[veronka@localhost ~]$ cut -d : -f1 /etc/passwd
-root
-bin
-daemon
+[veronka@localhost ~]$ cut -d : -f1 /etc/passwd | sort
 adm
-lp
-sync
-shutdown
-halt
-mail
-operator
-games
-ftp
-nobody
+avahi
+bin
+chrony
+colord
+daemon
 dbus
-rtkit
+dnsmasq
+ftp
+games
 geoclue
+gluster
+gnome-remote-desktop
+halt
+lp
+mail
+nm-openconnect
+nm-openvpn
+nobody
+nslcd
+openvpn
+operator
 pipewire
-tss
+polkitd
+postfix
+root
+rpc
+rtkit
+sddm
+shutdown
+sshd
+sync
+systemd-coredump
 systemd-oom
 systemd-resolve
-polkitd
-avahi
-colord
-postfix
-sshd
-gluster
-rpc
-unbound
-openvpn
-nm-openvpn
-sddm
-chrony
-dnsmasq
-nslcd
-tcpdump
-nm-openconnect
-systemd-coredump
 systemd-timesync
+tcpdump
+tss
+unbound
+user1
 vboxadd
 veronka
-gnome-remote-desktop
-user1
 ```
 
 ## Задача 2
