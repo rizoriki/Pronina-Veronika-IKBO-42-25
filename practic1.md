@@ -7,6 +7,7 @@
 ## Задача 1
 
 Вывести отсортированный в алфавитном порядке список имен пользователей в файле passwd (вам понадобится grep).
+
 ***Ответ:***
 ```
 [veronka@localhost ~]$ cut -d : -f1 /etc/passwd | sort
@@ -60,6 +61,16 @@ veronka
 
 ```
 [root@localhost etc]# cat /etc/protocols ...
+142 rohc
+141 wesp
+140 shim6
+139 hip
+138 manet
+```
+
+***Ответ***
+```
+[veronka@localhost ~]$ awk '!/^#/ && NF {printf "%3d %s\n", $2, $1}' /etc/protocols | sort -nr | head -5
 142 rohc
 141 wesp
 140 shim6
