@@ -132,6 +132,23 @@ printf '+%s+\n' "$dashes"
 h hello include int main n printf return stdio void world
 ```
 
+***Ответ:***
+```
+[veronka@localhost Рабочий стол]$ grep -oE '[a-zA-Z_][a-zA-Z0-9_]*' meowing | sort -u | paste -sd ' '
+cout endl include int iostream main MEOW namespace return std using
+```
+
+***Файл meowing.cpp:***
+```
+#include <iostream>
+using namespace std;
+int main()
+{
+    cout << "MEOW" << endl;
+    return 0;
+}
+```
+
 ## Задача 5
 
 Написать программу для регистрации пользовательской команды (правильные права доступа и копирование в /usr/local/bin).
