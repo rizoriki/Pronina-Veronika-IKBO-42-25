@@ -91,6 +91,37 @@ veronka
 
 Перед отправкой решения проверьте его в ShellCheck на предупреждения.
 
+***Ответ:***
+```
+[veronka@localhost Рабочий стол]$ ./banner "Hello from RTU MIREA!"
++-----------------------+
+| Hello from RTU MIREA! |
++-----------------------+
+[veronka@localhost Рабочий стол]$ ./banner "i love my cat"
++---------------+
+| i love my cat |
++---------------+
+```
+
+***Программа banner:***
+```
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <text>" >&2
+    exit 1
+fi
+
+text="$*"
+len=${#text}
+width=$((len + 2))
+
+printf -v dashes '%*s' "$width" ''
+dashes=${dashes// /-}
+
+printf '+%s+\n' "$dashes"
+printf '| %s |\n' "$text"
+printf '+%s+\n' "$dashes"
+```
+
 ## Задача 4
 
 Написать программу для вывода всех идентификаторов (по правилам C/C++ или Java) в файле (без повторений).
