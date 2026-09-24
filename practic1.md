@@ -68,9 +68,9 @@ veronka
 138 manet
 ```
 
-***Ответ***
+***Ответ:***
 ```
-[veronka@localhost ~]$ awk '!/^#/ && NF {printf "%3d %s\n", $2, $1}' /etc/protocols | sort -nr | head -5
+[veronka@localhost ~]$ awk '!/^#/ && NF {print $2, $1}' /etc/protocols | sort -nr | head -5
 142 rohc
 141 wesp
 140 shim6
