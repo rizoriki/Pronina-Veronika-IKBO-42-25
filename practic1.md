@@ -296,9 +296,56 @@ task8/a.txt0000644000175000017500000000000015257520232012756 0ustar  veronkavero
 
 Написать программу, которая заменяет в файле последовательности из 4 пробелов на символ табуляции. Входной и выходной файлы задаются аргументами.
 
+***Решение:***
+```
+[veronka@localhost Рабочий стол]$ nano change
+[veronka@localhost Рабочий стол]$ chmod +x change
+[veronka@localhost Рабочий стол]$ printf 'a    b\n' > in.txt
+[veronka@localhost Рабочий стол]$ ./change in.txt out.txt
+[veronka@localhost Рабочий стол]$ cat -A out.txt
+```
+***Файл change.sh:***
+```                                                
+#!/bin/bash
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <input> <output>" >&2
+    exit 1
+fi
+
+sed 's/    /\t/g' "$1" > "$2"
+```
+***Ответ:***
+```
+a^Ib$
+```
+
 ## Задача 10
 
 Написать программу, которая выводит названия всех пустых текстовых файлов в указанной директории. Директория передается в программу параметром. 
+
+***Решение:***
+```
+[veronka@localhost Рабочий стол]$ nano printEmpty
+[veronka@localhost Рабочий стол]$ chmod +x printEmpty
+[veronka@localhost Рабочий стол]$ mkdir task10
+[veronka@localhost Рабочий стол]$ touch task10/empty.txt
+[veronka@localhost Рабочий стол]$ echo hi > task10/full.txt
+[veronka@localhost Рабочий стол]$ ./printEmpty task10
+```
+***Файл printEmpty.sh:***
+```
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <dir>" >&2
+    exit 1
+fi
+
+find "$1" -type f -name '*.txt' -empty
+```
+***Ответ:***
+```
+task10/empty.txt
+```
 
 ## Полезные ссылки
 
