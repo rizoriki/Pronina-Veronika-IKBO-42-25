@@ -161,9 +161,70 @@ int main()
 
 В результате для banner задаются правильные права доступа и сам banner копируется в /usr/local/bin.
 
+***Ответ:***
+```
+[veronka@localhost Рабочий стол]$ touch coma
+[veronka@localhost Рабочий стол]$ nano coma
+[veronka@localhost Рабочий стол]$ chmod +x coma
+[veronka@localhost Рабочий стол]$ ./coma banner
+[sudo] пароль для veronka: 
+[veronka@localhost Рабочий стол]$ ls -l /usr/local/bin/banner
+-rwxr-xr-x. 1 root root 249 окт  1 19:48 /usr/local/bin/banner
+```
+
+***Файл coma.sh:***
+```
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "usage: $0 <file>" >&2
+    exit 1
+fi
+
+if [ ! -f "$1" ]; then
+    echo "file $1 is not found" >&2
+    exit 1
+fi
+
+sudo install -m 755 "$1" /usr/local/bin/
+```
+
 ## Задача 6
 
 Написать программу для проверки наличия комментария в первой строке файлов с расширением c, js и py.
+***Решение:***
+```
+[veronka@localhost Рабочий стол]$ nano coment
+[veronka@localhost Рабочий стол]$ chmod +x coment
+[veronka@localhost Рабочий стол]$ mkdir task6 && cd task6
+[veronka@localhost task6]$ echo "//meow" > file.c
+[veronka@localhost task6]$ echo 'console.log("i <3 my cat");' > file1.js
+[veronka@localhost task6]$ echo "#woof" > file2.py
+[veronka@localhost ~]$ cd 'Рабочий стол' && ./coment task6
+```
+***Файл coment.sh:***
+```
+#!/bin/bash
+dir="${1:-.}"
+
+find "$dir" -type f \( -name '*.c' -o -name '*.js' -o -name '*.py' \) | while IFS= read -r f; do
+    first=$(head -n 1 "$f")
+    case "$f" in
+        *.c|*.js) pattern='^[[:space:]]*(//|/\*)' ;;
+        *.py)     pattern='^[[:space:]]*#' ;;
+    esac
+    if [[ $first =~ $pattern ]]; then
+        echo "$f: there is comment in 1st row"
+    else
+        echo "$f: there is not comment in 1st row"
+    fi
+done
+```
+***Ответ:***
+```
+task6/file.c: there is comment in 1st row
+task6/file2.py: there is comment in 1st row
+task6/file1.js: there is not comment in 1st row
+```
 
 ## Задача 7
 
