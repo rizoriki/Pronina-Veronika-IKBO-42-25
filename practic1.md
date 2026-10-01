@@ -191,6 +191,7 @@ sudo install -m 755 "$1" /usr/local/bin/
 ## Задача 6
 
 Написать программу для проверки наличия комментария в первой строке файлов с расширением c, js и py.
+
 ***Решение:***
 ```
 [veronka@localhost Рабочий стол]$ nano coment
@@ -229,6 +230,32 @@ task6/file1.js: there is not comment in 1st row
 ## Задача 7
 
 Написать программу для нахождения файлов-дубликатов (имеющих 1 или более копий содержимого) по заданному пути (и подкаталогам).
+
+***Решение:***
+```
+[veronka@localhost Рабочий стол]$ nano findDouble
+[veronka@localhost Рабочий стол]$ chmod +x findDouble
+[veronka@localhost Рабочий стол]$ mkdir task7
+[veronka@localhost Рабочий стол]$ echo meow > task7/a.txt
+[veronka@localhost Рабочий стол]$ cp task7/a.txt task7/b.txt
+[veronka@localhost Рабочий стол]$ echo woof > task7/c.txt
+[veronka@localhost Рабочий стол]$ ./findDouble task7
+```
+***Файл findDouble.sh:***
+```
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <dir>" >&2
+    exit 1
+fi
+
+find "$1" -type f -exec md5sum {} + | sort | uniq -w32 --all-repeated=separate
+```
+***Ответ:***
+```
+ad606d6a24a2dec982bc2993aaaf9160  task7/a.txt
+ad606d6a24a2dec982bc2993aaaf9160  task7/b.txt
+```
 
 ## Задача 8
 
