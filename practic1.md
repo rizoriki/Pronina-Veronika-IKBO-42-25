@@ -261,6 +261,37 @@ ad606d6a24a2dec982bc2993aaaf9160  task7/b.txt
 
 Написать программу, которая находит все файлы в данном каталоге с расширением, указанным в качестве аргумента и архивирует все эти файлы в архив tar.
 
+***Решение:***
+```
+[veronka@localhost Рабочий стол]$ nano zip
+[veronka@localhost Рабочий стол]$ chmod +x zip
+[veronka@localhost Рабочий стол]$ mkdir task8 && cd task8
+[veronka@localhost task8]$ touch a.txt b.txt c.log
+[veronka@localhost task8]$ cd
+[veronka@localhost ~]$ cd 'Рабочий стол'
+[veronka@localhost Рабочий стол]$ ./zip task8 txt
+```
+***Файл zip.sh:***
+```
+#!/bin/bash
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <dir> <extension>" >&2
+    exit 1
+fi
+
+dir="$1"
+ext="$2"
+
+find "$dir" -maxdepth 1 -type f -name "*.$ext" -print0 | tar --null -T - -cf "archive_$ext.tar"
+```
+***Ответ:***
+```
+[veronka@localhost Рабочий стол]$ ls -l
+итого 64
+-rw-r--r--. 1 veronka veronka 10240 окт  1 21:08 archive_txt.tar
+[veronka@localhost Рабочий стол]$ cat archive_txt.tar
+task8/a.txt0000644000175000017500000000000015257520232012756 0ustar  veronkaveronkatask8/b.txt0000644000175000017500000000000015257520232012757 0ustar  veronkaveronka
+```
 ## Задача 9
 
 Написать программу, которая заменяет в файле последовательности из 4 пробелов на символ табуляции. Входной и выходной файлы задаются аргументами.
